@@ -31,6 +31,7 @@ def input_image_bytes(uploaded_file):
 
 # Initialize the Streamlit App
 st.set_page_config(page_title="MultiLanguage Invoice Extractor")
+st.title("Multi Language Invoice Data Extractor")
 input_prompt = """
 You are an expert in understanding invoices. Please try to answer the question using the information from the uploaded
 invoice.
@@ -43,7 +44,10 @@ if upload_image_file is not None:
 
 submit = st.button("Find the Answer from the Invoice")
 if submit:
-    input_image_data = input_image_bytes(upload_image_file)
-    response = get_gemini_respone(input_prompt, input_image_data, user_input_prompt)
-    st.subheader("Response")
+    with st.spinner('Processing...'):
+        
+        input_image_data = input_image_bytes(upload_image_file)
+        response = get_gemini_respone(input_prompt, input_image_data, user_input_prompt)
+        st.subheader("Response")
+    st.success('Success! ❤️ John Tan')
     st.write(response)
